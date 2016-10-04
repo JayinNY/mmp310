@@ -32,13 +32,13 @@
     <div id="theNames">
      
         <form id="myForm">
-        I love to have: <input type="text" id="name1" value=""><br>
-        I love to have: <input type="text" id="name1" value=""><br>
-        I love to have: <input type="text" id="name1" value=""><br>
-        I love to have: <input type="text" id="name1" value=""><br>
-        I love to have: <input type="text" id="name1" value=""><br>
-        I love to have: <input type="text" id="name1" value=""><br>
-        I love to have: <input type="text" id="name1" value=""><br>
+        I love to have: <input type="text" id="food1" value=""><br>
+        I love to have: <input type="text" id="food2" value=""><br>
+        I love to have: <input type="text" id="food3" value=""><br>
+        I love to have: <input type="text" id="food4" value=""><br>
+        I love to have: <input type="text" id="food5" value=""><br>
+        I love to have: <input type="text" id="food6" value=""><br>
+        I love to have: <input type="text" id="food7" value=""><br>
         </form>
     
     </div>
@@ -47,19 +47,77 @@
     <div id="theNames">
      
         <form id="myBev">
-        I love to drink: <input type="text" id="name1" value=""><br>
-        I love to drink: <input type="text" id="name1" value=""><br>
-        I love to drink: <input type="text" id="name1" value=""><br>
-        I love to drink: <input type="text" id="name1" value=""><br>
-        I love to drink: <input type="text" id="name1" value=""><br>
-        I love to drink: <input type="text" id="name1" value=""><br>
-        I love to drink: <input type="text" id="name1" value=""><br>
+        I love to drink: <input type="text" id="drink1" value=""><br>
+        I love to drink: <input type="text" id="drink2" value=""><br>
+        I love to drink: <input type="text" id="drink3" value=""><br>
+        I love to drink: <input type="text" id="drink4" value=""><br>
+        I love to drink: <input type="text" id="drink5" value=""><br>
+        I love to drink: <input type="text" id="drink6" value=""><br>
+        I love to drink: <input type="text" id="drink7" value=""><br>
         </form>
     </div>
     <button id="sortButton">Show me the lunch</button>
+    
     <div id="groupNames"> </div>
     
-    <script type="text/javascript">
+    <script>
+        
+        var sortButton = document.getElementById("sortButton");
+        var myform = document.getElementById("myForm");
+        var myBev = document.getElementById("myBev");
+        var foods = [];
+        var drinks = [];
+        var msg = '';
+        var i;
+        
+        
+        sortButton.onclick = function () {
+            var numberChooser = document.getElementById("numberChooser").value;
+            
+            for(i = 0; i<numberChooser;i++){
+                foods.push(myForm.elements[i].value);
+                drinks.push(myBev.elements[i].value);
+                
+            }
+                
+            
+            var foodIndex = foods.length, temporaryValue, randomIndex;
+           
+            
+            while (0 !== foodIndex) {
+                randomIndex = Math.floor(Math.random() * foodIndex);
+                foodIndex -= 1;
+                
+                temporaryValue = foods[foodIndex];
+                foods[foodIndex] = foods[randomIndex];
+                foods[randomIndex] = temporaryValue;
+            
+            }
+            
+            var drinksIndex = drinks.length, temporaryValue,randomIndex;
+            
+            while (0 !== drinksIndex) {
+                randomIndex = Math.floor(Math.random() * drinksIndex);
+                drinksIndex -= 1;
+                
+                temporaryValue = drinks[drinksIndex];
+                drinks[drinksIndex] = drinks[randomIndex];
+                drinks[randomIndex] = temporaryValue;
+            }
+            
+            
+            for(i=0; ((i<foods.length) && (i<drinks.length));i++){
+                
+                dayNumber = (i + 1);
+                
+                msg += "Day " + dayNumber + " : ";
+                
+                msg += foods[i] + " with " + drinks[i] + "<br />";             
+                
+            }
+            
+            document.getElementById("groupNames").innerHTML += "<h3>Your Lunch Is </h3> <br>" + msg;
+        }
        
         confirm("Haven't had lunch yet?!");
          
